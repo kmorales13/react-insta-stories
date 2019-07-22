@@ -60,6 +60,7 @@ export default class ReactInstaStories extends Component {
         <Container
           ref={c => this.c = c}
           stories={this.props.stories}
+          renderer={this.props.renderer}
           defaultInterval={this.props.defaultInterval}
           width={this.props.width}
           height={this.props.height}
@@ -79,6 +80,7 @@ ReactInstaStories.defaultProps = {
 
 ReactInstaStories.propTypes = {
   stories: PropTypes.array,
+  renderer: PropTypes.element.isRequired,
   defaultInterval: PropTypes.number,
   width: PropTypes.number,
   height: PropTypes.number,
