@@ -103,6 +103,7 @@ class Container extends React.PureComponent {
           playState={this.state.pause}
           width={this.width}
           story={this.props.stories[this.state.currentId]}
+          renderer={this.props.renderer}
           loader={this.props.loader}
           header={this.props.header}
           getVideoDuration={this.getVideoDuration}
