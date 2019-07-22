@@ -7,10 +7,13 @@ import globalStyle from './../styles.css'
 export default class Story extends React.Component {
   constructor(props) {
     super(props)
+    
     this.state = {
       loaded: false
     }
+    
     this.getStoryContent = this.getStoryContent.bind(this)
+    this.storyLoaded = this.storyLoaded.bind(this)
   }
   
   componentDidUpdate(prevProps) {
@@ -40,7 +43,7 @@ export default class Story extends React.Component {
     this.setState({ showMore: show })
   }
   
-  imageLoaded = () => {
+  storyLoaded() {
     try {
       if (this.pauseId) clearTimeout(this.pauseId)
       this.setState({loaded: true})
@@ -50,24 +53,10 @@ export default class Story extends React.Component {
     }
   }
   
-  videoLoaded = () => {
-    try {
-      this.props.getVideoDuration(this.vid.duration)
-      this.vid && this.vid.play().then(() => {
-        this.imageLoaded()
-      }).catch(e => {
-        this.props.action('pause')
-        console.log(e)
-      })
-    } catch (e) {
-      console.log(e)
-    }
-  }
-  
   getStoryContent() {
     const { story, renderer } = this.props;
     
-    return renderer(story, this.imageLoaded);
+    return renderer(story, this.storyLoaded);
   }
 
   render() {
