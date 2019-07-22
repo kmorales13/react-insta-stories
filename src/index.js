@@ -80,7 +80,7 @@ ReactInstaStories.defaultProps = {
 
 ReactInstaStories.propTypes = {
   stories: PropTypes.array,
-  renderer: PropTypes.element.isRequired,
+  renderer: PropTypes.any.isRequired,
   defaultInterval: PropTypes.number,
   width: PropTypes.number,
   height: PropTypes.number,
