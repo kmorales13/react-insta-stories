@@ -15,7 +15,7 @@ export default function seeMore(props) {
         props.action('pause')
       }} className={style.seeMore}>
         <span className={style.seemoreIcon}><img src={up} /></span>
-        <span className={style.seemoreText}>Read more</span>
+        <span className={style.seemoreText}>Enviar mensaje</span>
       </div>
   )
 }
