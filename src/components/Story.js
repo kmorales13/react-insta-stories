@@ -66,9 +66,8 @@ export default class Story extends React.Component {
   
   getStoryContent() {
     const { story, renderer } = this.props;
-    const Renderer = renderer;
     
-    return <Renderer onLoad={this.imageLoaded} />;
+    return renderer(story, this.imageLoaded);
   }
 
   render() {
