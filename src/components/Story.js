@@ -12,6 +12,7 @@ export default class Story extends React.Component {
     }
     this.getStoryContent = this.getStoryContent.bind(this)
   }
+  
   componentDidUpdate(prevProps) {
     if (this.props.story !== prevProps.story) {
       this.pauseId && clearTimeout(this.pauseId)
@@ -34,9 +35,11 @@ export default class Story extends React.Component {
       }
     }
   }
+  
   toggleMore = show => {
     this.setState({ showMore: show })
   }
+  
   imageLoaded = () => {
     try {
       if (this.pauseId) clearTimeout(this.pauseId)
@@ -46,6 +49,7 @@ export default class Story extends React.Component {
       console.log(e)
     }
   }
+  
   videoLoaded = () => {
     try {
       this.props.getVideoDuration(this.vid.duration)
@@ -59,18 +63,14 @@ export default class Story extends React.Component {
       console.log(e)
     }
   }
+  
   getStoryContent() {
-    let source = typeof this.props.story === 'object' ? this.props.story.url : this.props.story
-    let storyContentStyles = this.props.story.styles || this.props.storyContentStyles || styles.storyContent
-    let type = this.props.story.type === 'video' ? 'video' : 'image'    
-    return (
-      type === 'image' ? <img
-          style={storyContentStyles}
-          src={source}
-          onLoad={this.imageLoaded}
-        /> : (type === 'video' ? <video ref={r => { this.vid = r }} style={storyContentStyles} src={source} controls={false} onLoadedData={this.videoLoaded} autoPlay playsInline /> : null)
-    )
+    const { story, renderer } = this.props;
+    const Renderer = renderer;
+    
+    return <Renderer onLoad={this.imageLoaded} />;
   }
+
   render() {
     let isHeader = typeof this.props.story === 'object' && this.props.story.header
     return (
