@@ -13,6 +13,7 @@ export default class Story extends React.Component {
     }
     
     this.getStoryContent = this.getStoryContent.bind(this)
+    this.getStoryHeader = this.getStoryHeader.bind(this)
     this.storyLoaded = this.storyLoaded.bind(this)
   }
   
@@ -59,19 +60,30 @@ export default class Story extends React.Component {
     return renderer(story, this.storyLoaded);
   }
 
+  getStoryHeader(data) {
+    const { header } = this.props;
+    
+    return header(data);
+  }
+
   render() {
-    let isHeader = typeof this.props.story === 'object' && this.props.story.header
+    const isHeader = typeof this.props.story === 'object' && this.props.story.header
+    
     return (
       <div style={{...styles.story, width: this.props.width, height: this.props.height}}>
         {this.getStoryContent()}
+
         {isHeader && <div style={{position: 'absolute', left: 12, top: 20, zIndex: 19}}>
-          {this.props.header ? () => this.props.header(this.props.story.header) : <Header heading={this.props.story.header.heading} subheading={this.props.story.header.subheading} profileImage={this.props.story.header.profileImage} />}
+          {this.props.header ? this.getStoryHeader(this.props.story.header) : <Header heading={this.props.story.header.heading} subheading={this.props.story.header.subheading} profileImage={this.props.story.header.profileImage} />}
         </div>}
+
         {!this.state.loaded && <div style={{width: this.props.width, height: this.props.height, position: 'absolute', left: 0, top: 0, background: 'rgba(0, 0, 0, 0.9)', zIndex: 9, display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#ccc'}}>{this.props.loader || <div className={globalStyle.spinner} />}</div>}
+        
         {this.props.story.seeMore &&
-        <div style={{position: 'absolute', margin: 'auto', bottom: 0, zIndex: 9999, width: '100%'}}>
-          <SeeMore action={this.props.action} toggleMore={this.toggleMore} showContent={this.state.showMore} seeMoreContent={this.props.story.seeMore} />
-        </div>}
+          <div style={{position: 'absolute', margin: 'auto', bottom: 0, zIndex: 9999, width: '100%'}}>
+            <SeeMore action={this.props.action} toggleMore={this.toggleMore} showContent={this.state.showMore} seeMoreContent={this.props.story.seeMore} />
+          </div>
+        }
       </div>
     )
   }
