@@ -143,7 +143,7 @@ Container.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
   loader: PropTypes.element,
-  header: PropTypes.element,
+  header: PropTypes.func,
   storyContentStyles: PropTypes.object,
   loop: PropTypes.bool
 }
