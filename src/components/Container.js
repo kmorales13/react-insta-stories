@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 class Container extends React.PureComponent {
   constructor(props) {
     super(props)
+
     this.state = {
       currentId: 0,
       pause: true,
@@ -15,6 +16,15 @@ class Container extends React.PureComponent {
     this.defaultInterval = props.defaultInterval
     this.width = props.width
     this.height = props.height
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { currentId } = this.state
+    const { startIndex } = nextProps
+
+    if (startIndex && startIndex !== currentId) {
+      this.setState({ currentId: startIndex })
+    }
   }
 
   pause = (action, bufferAction) => {
