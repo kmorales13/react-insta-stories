@@ -23,7 +23,7 @@ class Container extends React.PureComponent {
     const { startIndex } = nextProps
     const oldprops = this.props
 
-    if (startIndex && startIndex !== currentId) {
+    if (startIndex !== null && startIndex !== currentId) {
       this.setState({ currentId: startIndex })
     }
   }
