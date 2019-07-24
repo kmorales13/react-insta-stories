@@ -155,7 +155,8 @@ Container.propTypes = {
   loader: PropTypes.element,
   header: PropTypes.func,
   storyContentStyles: PropTypes.object,
-  loop: PropTypes.bool
+  loop: PropTypes.bool,
+  startIndex: PropTypes.number,
 }
 
 Container.defaultProps = {
